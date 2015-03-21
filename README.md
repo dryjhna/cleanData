@@ -9,57 +9,30 @@ This assignment uses data from
 One of the most exciting areas in all of data science right now is wearable computing - see for example this article. Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract  new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained from.
 [Human Activity Recognition Using Smartphones] (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
-#How script works
-As a starting point all datasets required to prepare are considered to be present in the working directory
+##How script works
+As a starting point all datasets required to be present in the working directory.
 
- GitHub Markup
-=============
+###step 1:
+Load all datasets
+All sets of test and train datasets are compiled while loading them, thus no extra steps for combining test and train sets are required.
+Note: datasets inside "Inertial Signals" are not required as they have already been summarized in 561 measurement columns
 
-This library is the first step of a journey that every markup file in a repository goes on before it is rendered on GitHub.com:
+###step 2:
+Remove the special characters from second column of "features.txt", this would provide us clean variables.
+The variables obtained above are used as column labels for dataset x 
 
-0. This library converts the raw markup to HTML. See the list of [supported markup formats](#markups) below.
-0. The HTML is sanitized, aggressively removing things that could harm you and your kin—such as `script` tags, inline-styles, and `class` or `id` attributes. See the [sanitization filter](https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/sanitization_filter.rb) for the full whitelist.
-0. Syntax highlighting is performed on code blocks. See [github/linguist](https://github.com/github/linguist#syntax-highlighting) for more information about syntax highlighting.
-0. The HTML is passed through other filters in the [html-pipeline](https://github.com/jch/html-pipeline) that add special sauce, such as [emoji](https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/emoji_filter.rb), [task lists](https://github.com/github/task_list/blob/master/lib/task_list/filter.rb), [named anchors](https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/toc_filter.rb), [CDN caching for images](https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/camo_filter.rb), and  [autolinking](https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/autolink_filter.rb).
-0. The resulting HTML is rendered on GitHub.com.
 
-Please see our [contributing guidelines](CONTRIBUTING.md) before reporting an issue.
+###step 3:
+We transpose the dataset from step 2 and keep only the required rows, which have "mean" & "std" in their names
 
-Markups
--------
+###step 4:
+Transpose the datasets again to get required measurements as columns, now add subject no. from "subject" and activity no. from "Y".
+Merge in activity description using activity code from "activity_labels"
 
-The following markups are supported.  The dependencies listed are required if
-you wish to run the library. You can also run `script/bootstrap` to fetch them all.
-
-* [.markdown, .mdown, .mkdn, .md](http://daringfireball.net/projects/markdown/) -- `gem install redcarpet` (https://github.com/vmg/redcarpet)
-* [.textile](http://www.textism.com/tools/textile/) -- `gem install RedCloth`
-* [.rdoc](http://rdoc.sourceforge.net/) -- `gem install rdoc -v 3.6.1`
-* [.org](http://orgmode.org/) -- `gem install org-ruby`
-* [.creole](http://wikicreole.org/) -- `gem install creole`
-* [.mediawiki, .wiki](http://www.mediawiki.org/wiki/Help:Formatting) -- `gem install wikicloth`
-* [.rst](http://docutils.sourceforge.net/rst.html) -- `easy_install docutils`
-* [.asciidoc, .adoc, .asc](http://asciidoc.org/) -- `gem install asciidoctor` (http://asciidoctor.org)
-* [.pod](http://search.cpan.org/dist/perl/pod/perlpod.pod) -- `Pod::Simple::HTML`
-  comes with Perl >= 5.10. Lower versions should install [Pod::Simple](http://search.cpan.org/~dwheeler/Pod-Simple-3.28/lib/Pod/Simple.pod) from CPAN.
-
-Installation
------------
-
-    gem install github-markup
-
-Usage
------
-
-    require 'github/markup'
-    GitHub::Markup.render('README.markdown', "* One\n* Two")
-
-Or, more realistically:
-
-    require 'github/markup'
-    GitHub::Markup.render(file, File.read(file))
-
-Contributing
-------------
-
-See [Contributing](CONTRIBUTING.md)
-
+###step 4:
+Transpose the datasets again to get required measurements as columns, now add subject no. from "subject" and activity no. from "Y".
+Merge in activity description using activity code from "activity_labels"
+ 
+###step 5:
+Summarise all the measurements at activity and subject level, using functions from dplyr
+Output the final file "summarizedMeasurements.txt"

@@ -61,7 +61,7 @@ Range of integers 1-30, each number refers to a subject who participated to prov
 
 *************************************************************************************************************
 
-###All the columns below were calculated by averaging out the mean and std of the measurements as specified above, at the level of Subject and Activity thus we get unique measurements for each combinatoin of subject and activity. 
+###All the columns below were calculated by averaging out the mean and std of the measurements as specified above, at the level of Subject and Activity thus we get unique measurements for each combination of subject and activity. 
 
 3. tBodyAccmeanX
 4. tBodyAccmeanY
